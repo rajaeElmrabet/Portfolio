@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajae El-Mrabet - Ingénieure Systèmes, Réseaux et Cybersécurité</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #00b4d8;
+            --accent: #ff6b6b;
+            --dark: #121212;
+            --dark-light: #1e1e1e;
+            --darker: #0a0a0a;
+            --text: #f8f9fa;
+            --text-muted: #adb5bd;
+            --glass-bg: rgba(30, 30, 46, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, var(--dark-light) 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background animé */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(138, 43, 226, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+            box-shadow: 0 0 40px rgba(138, 43, 226, 0.2);
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            right: 30%;
+            animation-delay: 9s;
+        }
+
+        .shape:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            bottom: 40%;
+            right: 20%;
+            animation-delay: 12s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Effet glassmorphisme */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Header et Navigation */
+        header {
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text);
+            background: rgba(138, 43, 226, 0.2);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 80%;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px 20px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .content-wrapper {
+            min-height: calc(100vh - 300px);
+        }
+
+        /* Page d'accueil */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 60px 40px;
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--primary);
+        }
+
+        .hero-content {
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(138, 43, 226, 0.2);
+            border-radius: 50%;
+            color: var(--text);
+            font-size: 20px;
+            transition: var(--transition);
+            border: 1px solid var(--primary);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.6);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: rgba(138, 43, 226, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Page Expériences */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .timeline-content p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Page À propos */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        .about-text {
+            padding: 40px;
+            color: white;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: var(--text);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .education-card {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .education-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .education-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .education-card p {
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* Page Projets */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .project-card {
+            padding: 30px;
+            color: white;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 180, 216, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--secondary);
+            margin-right: 15px;
+            border: 1px solid var(--secondary);
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            color: white;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .tech-tag {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--accent);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--accent);
+        }
+
+        /* Page Certifications */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .certification-card {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .certification-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .certification-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .certification-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Page Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            padding: 40px;
+        }
+
+        .contact-form h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .contact-info {
+            padding: 40px;
+            color: white;
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .contact-item-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(138, 43, 226, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .contact-item-text h4 {
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .contact-item-text p, .contact-item-text a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-item-text a:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        #footer {
+            margin-top: 60px;
+            padding: 30px 0;
+        }
+
+        .footer-content {
+            padding: 30px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+            padding: 5px 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            padding-top: 20px;
+        }
+
+        .copyright a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page {
+                padding: 30px 15px 15px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+                padding: 40px 20px;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+
+            .about-content, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid, .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .footer-links a {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav class="glass">
+                <div class="logo" onclick="showPage('home')">
+                    <div class="logo-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span>Rajae El-Mrabet</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" onclick="showPage('home')" class="active">Accueil</a>
+                    <a href="#" onclick="showPage('experience')">Expériences</a>
+                    <a href="#" onclick="showPage('about')">Compétences</a>
+                    <a href="#" onclick="showPage('projects')">Projets</a>
+                    <a href="#" onclick="showPage('certifications')">Certifications</a>
+                    <a href="#" onclick="showPage('contact')">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE ACCUEIL -->
+    <div id="home" class="page active">
+        <div class="container">
+            <div class="content-wrapper">
+                <section class="hero glass">
+                    <div class="hero-image">
+                        <img src="C:\Users\user1\Desktop\pr\photo pr.png" alt="Rajae El-Mrabet" />
+                    </div>
+                    <div class="hero-content">
+                        <h1>Rajae El-Mrabet</h1>
+                        <div class="subtitle">Ingénieure systèmes, réseaux et cybersécurité</div>
+                        <p>Passionnée par les technologies innovantes, la sécurité informatique et l'intelligence artificielle appliquée à la cybersécurité.</p>
+                        
+                        <div class="social-links">
+                            <a href="mailto:rajaeelmrabet01@gmail.com" title="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/rajae-el-mrabet-b94a28273/" target="_blank" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/rajaeElmrabet" target="_blank" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                        
+                        <a href="#" class="cta-button" onclick="showPage('experience')">Voir mon parcours</a>
+                    </div>
+                </section>
+
+                <section class="features">
+
+                    <div class="feature-card glass">
+                        <div class="feature-icon"></div>
+                        <h3>Développement Full-Stack</h3>
+                    </div>
+
+
+
+                    <div class="feature-card glass">
+                        <div class="feature-icon"></div>
+                        <h3>Ingénierie Systèmes, Réseaux et Cybersécurité </h3>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE EXPÉRIENCES -->
+    <div id="experience" class="page">
+        <div class="container">
+            <div class="content-wrapper">
+                <section class="hero glass">
+                    <h1>Expériences Professionnelles</h1>
+                    <p>Mon parcours à travers différents stages spécialisés en cybersécurité et développement.</p>
+                </section>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content glass">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar"></i>
+                                Février 2025 – Juillet 2025
+                            </div>
+                            <h3>Stage - Développeuse Full-Stack – Cybersécurité IA</h3>
+                            <p>Conception et développement d'une plateforme de communication sécurisée intégrant WebRTC, Blockchain et chiffrement AES, avec détection d'intrusion intelligente et assistant virtuel en cybersécurité basé sur l'IA.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content glass">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar"></i>
+                                Juillet 2024 – Août 2024
+                            </div>
+                            <h3>Stage - Développeuse Full-Stack – Sécurité Réseau</h3>
+                            <p>Conception d'une architecture réseau pour plateforme de streaming vidéo en temps réel, intégrant monitoring, sécurité des flux et optimisation du trafic réseau.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content glass">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar"></i>
+                                Février 2024 – Mai 2024
+                            </div>
+                            <h3>Stage - Ingénieure Réseaux - Sécurité</h3>
+                            <p>Conception d'un système intelligent de détection de fraudes et d'anomalies. Analyse des flux réseau, des logs système et des comportements suspects pour renforcer la sécurité des infrastructures.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content glass">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar"></i>
+                                Janvier 2024
+                            </div>
+                            <h3>Stage - Ingénieure Systèmes - Supervision</h3>
+                            <p>Déploiement d'outils de supervision et de monitoring système en Python. Gestion des serveurs et détection d'incidents réseau.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content glass">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar"></i>
+                                Novembre 2023
+                            </div>
+                            <h3>Stage - Développeuse Frontend</h3>
+                            <p>Réalisation d'interfaces web responsives et optimisées. Intégration de la visualisation de données et de tableaux de bord pour le suivi système.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content glass">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar"></i>
+                                Juillet 2023 – Août 2023
+                            </div>
+                            <h3>Stage - Ingénieure Full-Stack - Sécurité</h3>
+                            <p>Développement d'un portail client sécurisé avec authentification, gestion des contrats et suivi des interventions techniques.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content glass">
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar"></i>
+                                Juillet 2022 – Août 2022
+                            </div>
+                            <p>Conception dashboard web d'alertes en temps réel pour la surveillance des équipements ZKTeco.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE COMPÉTENCES -->
+    <div id="about" class="page">
+        <div class="container">
+            <div class="content-wrapper">
+                <section class="about-content">
+                    <div class="about-text glass">
+                        <h2>Compétences Techniques</h2>
+                        <p>Au fil de mes études et expériences professionnelles, j'ai développé un large éventail de compétences techniques dans les domaines du développement, des réseaux et de la cybersécurité.</p>
+
+                        <h3></h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">HTML</div>
+                            <div class="skill-item">CSS</div>
+                            <div class="skill-item">TailwindCSS</div>
+                            <div class="skill-item">JavaScript</div>
+                            <div class="skill-item">React</div>
+                            <div class="skill-item">Vue.js</div>
+                            <div class="skill-item">NEXT.js</div>
+                            <div class="skill-item">Node.js</div>
+                            <div class="skill-item">Express</div>
+                            <div class="skill-item">Flask</div>
+                            <div class="skill-item">Python</div>
+                            <div class="skill-item">Java POO</div>
+                            <div class="skill-item">PHP</div>
+                            <div class="skill-item">MySQL</div>
+                            <div class="skill-item">UML</div>
+                            <div class="skill-item">Merise</div>
+                            <div class="skill-item">Linux</div>
+                            <div class="skill-item">Windows</div>
+                            <div class="skill-item">Sécurité réseau</div>
+                            <div class="skill-item">Administration réseau</div>
+                            <div class="skill-item">Machine Learning</div>
+                            <div class="skill-item">Deep Learning</div>
+                            <div class="skill-item">Data Mining</div>
+                            <div class="skill-item">Data Analytics</div>
+                        </div>
+                    </div>
+
+                    <div class="stats">
+                        <div class="education-card glass">
+                            <div class="education-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Formation</h3>
+                            <p><strong>Ingénieur systèmes, réseaux et cybersécurité</strong></p>
+                            <p>Master Institut F2I</p>
+                            <p>Vincennes, Île-de-France</p>
+                        </div>
+
+                        <div class="stat-card glass">
+                            <div class="stat-number">+6</div>
+                            <div class="stat-label">Stages Techniques</div>
+                        </div>
+                        <div class="stat-card glass">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Projets Réalisés</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+<!-- PAGE PROJETS -->
+<div id="projects" class="page">
+    <div class="container">
+        <div class="content-wrapper">
+            <section class="hero glass">
+                <h1>Mes Projets</h1>
+            </section>
+
+            <section class="projects-grid">
+                <div class="project-card glass">
+                    <div class="project-header">
+                        <h3>Plateforme de Communication Sécurisée</h3>
+                    </div>
+                </div>
+
+                <div class="project-card glass">
+                    <div class="project-header">
+                        <h3>Plateforme de Streaming Vidéo Sécurisée</h3>
+                    </div>
+                </div>
+
+                <div class="project-card glass">
+                    <div class="project-header">
+                        <h3>Système de Détection de Fraudes et Anomalies</h3>
+                    </div>
+                </div>
+
+                <div class="project-card glass">
+                    <div class="project-header">
+                        <h3>Portail Client Sécurisé</h3>
+                    </div>
+                </div>
+
+                <div class="project-card glass">
+                    <div class="project-header">
+                        <h3>SIEM Open Source avec Elastic Stack et Wazuh</h3>
+                    </div>
+                </div>
+
+                <div class="project-card glass">
+                    <div class="project-header">
+                        <h3>Analyse et Détection de Malwares</h3>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- PAGE CERTIFICATIONS -->
+    <div id="certifications" class="page">
+        <div class="container">
+            <div class="content-wrapper">
+                <section class="hero glass">
+                    <h1>Certifications</h1>
+                </section>
+
+                <section class="certifications-grid">
+                    <div class="certification-card glass">
+                        <div class="certification-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Orange Digital Center</h3>
+                        <p>Front End Development, Python, SQL</p>
+                    </div>
+
+                    <div class="certification-card glass">
+                        <div class="certification-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>ALX Engineering Program</h3>
+                        <p>Programme d'ingénierie avancé</p>
+                    </div>
+
+                    <div class="certification-card glass">
+                        <div class="certification-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Coursera</h3>
+                        <p>Project Management, IT Support, Full-stack developer, Cybersécurité</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE CONTACT -->
+    <div id="contact" class="page">
+        <div class="container">
+            <div class="content-wrapper">
+                <section class="contact-grid">
+                    <div class="contact-form glass">
+                        <h2>Me contacter</h2>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Nom complet</label>
+                                <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse e-mail</label>
+                                <input type="email" id="email" name="email" placeholder="Votre email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+                            </div>
+                            <button type="submit" class="cta-button">Envoyer</button>
+                        </form>
+                    </div>
+
+                    <div class="contact-info glass">
+                        <h2>Coordonnées</h2>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"></div>
+                            <div class="contact-item-text">
+                                <h4>Email</h4>
+                                <p>rajaeelmrabet01@gmail.com</p>
+                            </div>
+                        </div>
+
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon"></div>
+                            <div class="contact-item-text">
+                                <h4>LinkedIn</h4>
+                                <p><a href="https://www.linkedin.com/in/rajae-el-mrabet-b94a28273/" target="_blank">Voir mon profil</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon"></div>
+                            <div class="contact-item-text">
+                                <h4>GitHub</h4>
+                                <p><a href="https://github.com/rajaeElmrabet" target="_blank">Voir mes projets</a></p>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+        <div class="container">
+            <footer class="glass">
+                <div class="footer-content">
+                    <div class="footer-links">
+                        <a href="#" onclick="showPage('home')">Accueil</a>
+                        <a href="#" onclick="showPage('experience')">Expériences</a>
+                        <a href="#" onclick="showPage('about')">Compétences</a>
+                        <a href="#" onclick="showPage('projects')">Projets</a>
+                        <a href="#" onclick="showPage('certifications')">Certifications</a>
+                        <a href="#" onclick="showPage('contact')">Contact</a>
+                    </div>
+                    <div class="copyright">
+                        © 2025 Rajae El-Mrabet. Tous droits réservés.
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 'home';
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick') === `showPage('${pageId}')`) {
+                    link.classList.add('active');
+                }
+            });
+            
+            currentPage = pageId;
+            
+            // Move footer to the active page
+            const footer = document.getElementById('footer');
+            const activePage = document.getElementById(pageId);
+            activePage.appendChild(footer);
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize footer position
+        window.addEventListener('DOMContentLoaded', () => {
+            const footer = document.getElementById('footer');
+            const homePage = document.getElementById('home');
+            homePage.appendChild(footer);
+        });
+
+        // Add interactive parallax effect to background shapes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.5;
+                const xPos = (x - 0.5) * speed * 20;
+                const yPos = (y - 0.5) * speed * 20;
+                shape.style.transform = `translate(${xPos}px, ${yPos}px)`;
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Create success message
+            const successMsg = document.createElement('div');
+            successMsg.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(46, 204, 113, 0.9);
+                color: white;
+                padding: 20px 40px;
+                border-radius: 10px;
+                backdrop-filter: blur(20px);
+                z-index: 10000;
+                animation: fadeIn 0.3s ease;
+            `;
+            successMsg.textContent = 'Message envoyé avec succès! Je vous répondrai bientôt.';
+            
+            document.body.appendChild(successMsg);
+            
+            // Remove message after 3 seconds
+            setTimeout(() => {
+                successMsg.remove();
+            }, 3000);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add fade in animation
+        const fadeStyle = document.createElement('style');
+        fadeStyle.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            }
+        `;
+        document.head.appendChild(fadeStyle);
+    </script>
+</body>
+</html>
